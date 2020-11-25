@@ -152,6 +152,7 @@ export default createStore({
       return [...new Set(categories)];
     },
     token: ({ token }) => token,
+    user: ({ user }) => user,
   },
   mutations: {
     setSelectedMovie(state, id) {
@@ -198,13 +199,8 @@ export default createStore({
       movies.sort(sortByRating.find((el) => el.selected).sortFunction);
     },
     login(state, payload) {
-      if (
-        state.user.email === payload.email &&
-        state.user.password === payload.password
-      ) {
-        state.token = Date.now();
-        localStorage.setItem("token", JSON.stringify(state.token));
-      }
+      state.token = Date.now();
+      localStorage.setItem("token", JSON.stringify(state.token));
     },
     logout(state) {
       state.token = "";

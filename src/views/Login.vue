@@ -15,6 +15,9 @@
       Please enter a valid email and password (must be at least 6 characters
       long).
     </p>
+    <p v-if="error">
+      Wrong password or email
+    </p>
   </div>
 </template>
 
@@ -25,7 +28,13 @@ export default {
       email: "",
       password: "",
       formIsValid: true,
+      error: false,
     };
+  },
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    },
   },
   methods: {
     login() {
@@ -42,8 +51,15 @@ export default {
         email: this.email,
         password: this.password,
       };
-      this.$store.commit("login", actionPayload);
-      this.$router.push("/movies");
+      if (
+        this.user.email === this.email &&
+        this.user.password === this.password
+      ) {
+        this.$store.commit("login", actionPayload);
+        this.$router.push("/movies");
+      } else {
+        this.error = true;
+      }
     },
   },
 };
