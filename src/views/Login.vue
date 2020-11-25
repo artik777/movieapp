@@ -47,15 +47,11 @@ export default {
         this.formIsValid = false;
         return;
       }
-      const actionPayload = {
-        email: this.email,
-        password: this.password,
-      };
       if (
         this.user.email === this.email &&
         this.user.password === this.password
       ) {
-        this.$store.commit("login", actionPayload);
+        this.$store.commit("login");
         this.$router.push("/movies");
       } else {
         this.error = true;

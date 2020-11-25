@@ -198,7 +198,7 @@ export default createStore({
         sortByRating[i].selected = i == index;
       movies.sort(sortByRating.find((el) => el.selected).sortFunction);
     },
-    login(state, payload) {
+    login(state) {
       state.token = Date.now();
       localStorage.setItem("token", JSON.stringify(state.token));
     },
